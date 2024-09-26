@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4 mb-4">Calculadora de Custos</h1>
+    <form>
+        <div class="col-4 m-auto mb-2 text-start">
+            <div>
+                <label for="SalarioBruto">Salário Bruto</label>
+            </div>
+            <div>
+                <input name="SalarioBruto" type="number" step=".01" placeholder="0,00" class="w-100 text-end" />
+            </div>            
+        </div>
+        <div class="col-4 m-auto mb-2 text-start">
+            <div>
+                <label for="PlanoSaude">Plano de Saúde</label>
+            </div>
+            <div>
+                <input name="PlanoSaude" type="number" step=".01" placeholder="0,00" class="w-100 text-end" />
+            </div>
+        </div>
+        <div class="col-4 m-auto mb-2 text-start">
+            <div>
+                <label for="SeguroVida">Seguro de Vida</label>
+            </div>
+            <div>
+                <input name="SeguroVida" type="number" step=".01" placeholder="0,00" class="w-100 text-end" />
+            </div>
+        </div>
+        <div class="col-4 m-auto mb-2 text-start">
+            <div>
+                <label for="OutrosBeneficios">Outros Benefícios</label>
+            </div>
+            <div>
+                <input name="OutrosBeneficios" type="number" step=".01" placeholder="0,00" class="w-100 text-end" />
+            </div>
+        </div>
+
+        <button id="btnCalcular" asp-controller="Calculo" asp-action="Relatorio" class="btn-dark mt-3 px-4 py-2">Calcular</button>
+    </form>
+</div>

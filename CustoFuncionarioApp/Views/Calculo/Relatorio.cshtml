@@ -1,0 +1,78 @@
+﻿@model CustoFuncionarioApp.Models.Custo;
+@{
+    ViewData["Title"] = "Relatório de Custos";
+}
+
+<div class="text-center">
+    <h1 class="display-4 mb-4">Relatório de Custos</h1>
+
+    <div class="col-sm-8 col-md-4 mx-md-auto">
+        <p>
+            <span class="fw-bold">Salário Bruto: </span> R$
+            @Model.SalarioBruto.ToString("N2")            
+        </p>
+        <p>
+            <span class="fw-bold">INSS: </span> R$
+            @Model.getINSS_Valor().ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">FGTS: </span> R$
+            @Model.getFGTS().ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">13º Salário: </span> R$
+            @Model.get13oSalario().ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">Férias: </span> R$
+            @Model.getFerias().ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">Plano de Saúde: </span> R$
+            @Model.PlanoSaude.ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">Seguro de Vida: </span> R$
+            @Model.SeguroVida.ToString("N2")
+        </p>
+        <p>
+            <span class="fw-bold">Outros Benefícios: </span> R$
+            @Model.OutrosBeneficios.ToString("N2")
+        </p>
+        <hr />
+        <p>
+            <span class="fw-bold">Custo Total: </span> R$
+            @Model.getCustoTotal().ToString("N2")
+        </p>
+        <hr />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <div class="col-sm-8 col-md-4 mx-md-auto">
+        <canvas id="myPieChart" width="250" height="250"></canvas>
+        <script>
+            var salarioBruto = @Html.Raw(Json.Serialize(Model.SalarioBruto));
+            var inss = @Html.Raw(Json.Serialize(Model.getINSS_Valor()));
+            var fgts = @Html.Raw(Json.Serialize(Model.getFGTS()));
+            var decimoTerc = @Html.Raw(Json.Serialize(Model.get13oSalario()));
+            var ferias = @Html.Raw(Json.Serialize(Model.getFerias()));
+            var planoSaude = @Html.Raw(Json.Serialize(Model.PlanoSaude));
+            var seguroVida = @Html.Raw(Json.Serialize(Model.SeguroVida));
+            var outrosBeneficios = @Html.Raw(Json.Serialize(Model.OutrosBeneficios));
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Salário Bruto', 'INSS', 'FGTS', '13º Salário', 'Férias', 'Plano de Saúde', 'Seguro de Vida', 'Outros Benefícios'],
+                    datasets: [{
+                        data: [salarioBruto, inss, fgts, decimoTerc, ferias, planoSaude, seguroVida, outrosBeneficios],
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        </script>
+    </div>
+</div>
